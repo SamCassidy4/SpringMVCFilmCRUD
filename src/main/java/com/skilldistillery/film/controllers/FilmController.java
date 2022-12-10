@@ -64,19 +64,18 @@ public class FilmController {
 		mv.setViewName("WEB-INF/redirect.jsp");
 		return mv;
 	}
-	@RequestMapping(path = "deleteFilm.do", method= RequestMethod.POST)
-	public ModelAndView deleteFilm(@RequestParam("deleteFilm") String delete, @RequestParam("id") Integer id) {
+	@RequestMapping(path = "delete.do", method= RequestMethod.POST)
+	public ModelAndView deleteFilm( @RequestParam("id") Integer id) {
 		ModelAndView mv = new ModelAndView();
 		
-		if(delete.toUpperCase().equals("YES")) {
+		
 			boolean success = filmDAO.deleteFilm(filmDAO.findFilmById(id));
 			
 			if(success) {
-				mv.setViewName("");
+				mv.setViewName("WEB-INF/sucess.jsp");
 			} else {
-				mv.setViewName("delete.html");
+				mv.setViewName("WEB-INF/deleteError.jsp");
 			}
-		}
 		return mv;
 	}
 }

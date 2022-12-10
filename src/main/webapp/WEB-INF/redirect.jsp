@@ -12,7 +12,12 @@
 	<p>${film.title } ${film.description } ${film.releaseYear }
 		${film.language } ${film.rating }</p>
 	Do you want to delete this film?
-	<a href="delete.html">Delete</a>
+	<form action="delete.do" method="POST" >
+	<input type="hidden" name="id" value="${film.id}">
+	 <button>Delete</button>
+	
+	</form>
+	
 	<br> Do you want to edit it?
 	<a href="edit.html">Edit</a>
 </body>
