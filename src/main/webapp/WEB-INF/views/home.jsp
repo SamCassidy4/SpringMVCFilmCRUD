@@ -10,15 +10,7 @@
 
 <h1> SD Movie Database</h1>
 
-<select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-  <option selected>What language is the movie in?</option>
-  <option value="1">English</option>
-  <option value="2">Italian</option>
-  <option value="3">Japanese</option>
-  <option value="4">Mandarin</option>
-  <option value="5">French</option>
-  <option value="6">German</option>
-</select>
-
+<a href="CreateMovie.html">Create a movie</a><br>
+<a href="SearchForMovieByID.html">Search for a movie by ID</a><br>
 </body>
 </html>
