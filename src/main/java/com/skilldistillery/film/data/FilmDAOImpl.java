@@ -351,12 +351,12 @@ public class FilmDAOImpl implements FilmDAO {
 			ps.setString(1, film.getTitle());
 			ps.setString(2, film.getDescription());
 			ps.setInt(3, film.getReleaseYear());
+			ps.setString(4, film.getRating());
 //			ps.setInt(4, film.getLanguageId());
 //			ps.setInt(5, film.getRentalDuration());
 //			ps.setDouble(6, film.getRentalRate());
 //			ps.setInt(7, film.getLength());
 //			ps.setDouble(8, film.getReplacementCost());
-			ps.setString(9, film.getRating());
 //			ps.setString(10, film.getSpecialFeatures());
 			int updateCount = ps.executeUpdate();
 			if (updateCount == 1) {
@@ -376,6 +376,17 @@ public class FilmDAOImpl implements FilmDAO {
 			} else {
 				film = null;
 			}
+			
+				String sql2 ="SELECT LAST_INSERT_ID()";
+				PreparedStatement stmt = conn.prepareStatement(sql2);
+				int filmId = 0;
+				stmt.setInt(1, filmId);
+				ResultSet rs = stmt.executeQuery();
+				if(rs != null) {
+					filmId = rs.getInt("id");
+					film.setId(filmId);
+				}
+				
 			conn.close();
 			conn.commit();
 		}

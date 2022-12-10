@@ -10,15 +10,16 @@
 </head>
 <body>
 	<p>
-	ID: ${film.id }
+	${film } <br>
 	Title: <strong> ${film.title } </strong><br>
 	Description:  ${film.description } <br>
 	Released: ${film.releaseYear } <br>
 	Language:	${film.language } <br>
 	Rated: ${film.rating }</p>
 	Do you want to delete this film?
-	<form action="delete.do" method="POST" >
+	<form action="delete.do" method="GET" >
 	<input type="hidden" name="id" value="${film.id}">
+	<input type="text" name="film" value ="${film}">
 	 <button>Delete</button>
 	
 	</form>
