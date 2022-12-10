@@ -9,10 +9,16 @@
 
 	<a href="CreateMovie.html">Create a movie</a>
 	<br> Search by Movie ID:
-	<form action="SearchByID.do" method="GET">
+	<form action="SearchForMovie.do" method="GET">
 		<input type="text" name="id" /> <a href="SearchForMovieByID.html">
-			<input type="submit" value="Search" />
-		</a>
+			<input type="submit" value="Search For Movie" /> <!-- UNSURE IS THIS IS INCORRECT -->
+		</a><br>
+		Check to see if we have a film that matches a keyword:
+		<br>
+		<form action="SearchByKeyword.do" method="GET">
+		<input type=text name="title"><!-- need to include description too  -->
+		<input type="submit" value="Search By Keyword">
+		</form>
 	</form>
 	<br>
 	<!-- <a href="SearchForMovieByID.html">
