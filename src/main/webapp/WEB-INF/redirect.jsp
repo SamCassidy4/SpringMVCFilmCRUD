@@ -9,11 +9,15 @@
 <title>Film Information!</title>
 </head>
 <body>
-	<p>${film.title } ${film.description } ${film.releaseYear }
-		${film.language } ${film.rating }</p>
+	<p>
+	Title: <strong> ${film.title } </strong><br>
+	Description:  ${film.description } <br>
+	Released: ${film.releaseYear } <br>
+	Language:	${film.language } <br>
+	Rated: ${film.rating }</p>
 	Do you want to delete this film?
 	<a href="delete.html">Delete</a>
 	<br> Do you want to edit it?
-	<a href="edit.html">Edit</a>
+	<a href="WEB-INF/edit.jsp">Edit</a>
 </body>
 </html>
