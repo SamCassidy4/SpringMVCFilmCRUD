@@ -52,10 +52,29 @@ public class FilmController {
 		return mv;
 	}
 
-	@RequestMapping(path ="searchForFilm.do", method=RequestMethod.GET)
-	public ModelAndView searchByID(Film film) {
+	@RequestMapping(path ="searchForFilmId.do", method=RequestMethod.GET)
+	public ModelAndView searchByID(@RequestParam("id")Integer id) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName(null);
+		Film film = null;
+		filmDAO.findFilmById(id);
+		if(film == null) {
+			mv.setViewName("WEB-INF/error.jsp");
+		}
+		mv.addObject("film", film);
+		mv.setViewName("WEB-INF/SearchForMovieByID.html");
+		return mv;
+	}
+	@RequestMapping(path = "deleteFilm.do", method= RequestMethod.POST)
+	public ModelAndView deleteFilm(@RequestParam("deleteFilm") String delete, @RequestParam("id") Integer id) {
+		ModelAndView mv = new ModelAndView();
+		
+		if(delete.toUpperCase().equals("YES")) {
+			boolean success = filmDAO.deleteFilm(filmDAO.findFilmById(id));
+			
+			if(success) {
+				mv.setViewName("delete.html");
+			}
+		}
 		return mv;
 	}
 }

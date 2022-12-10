@@ -454,8 +454,43 @@ public class FilmDAOImpl implements FilmDAO {
 		}
 		return true;
 	}
-	
-	//TODO: Create a delete film method returns a boolean
-	//1. Takes in a Film object
-	//2. see notes for example
+
+	public boolean deleteFilm(Film film) {
+		String username = "student";
+		String password = "student";
+
+		Connection conn = null;
+
+		try {
+			conn = DriverManager.getConnection(URL, username, password);
+			conn.setAutoCommit(false);
+			String sql = "DELETE FROM film_actor where film_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, film.getId());
+
+			int updateCount = ps.executeUpdate();
+			sql = "DELETE FROM film WHERE id = ? ";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, film.getId());
+			updateCount = ps.executeUpdate();
+			
+			conn.close();
+			conn.commit();
+			
+		}
+		catch (SQLException sqle) {
+		    sqle.printStackTrace();
+		    if (conn != null) {
+		      try { conn.rollback(); }
+		      catch (SQLException sqle2) {
+		        System.err.println("Error trying to rollback");
+		      }
+		    }
+		    return false;
+		  }
+		  return true;
+		}
 }
+			
+
+		
