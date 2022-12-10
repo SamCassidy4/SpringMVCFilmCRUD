@@ -1,15 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>MVC FIlm Site</title>
+<title>Movie Information</title>
 </head>
 <body>
 
 	<h1>SD Film Database</h1>
-
+	<c:forEach var="films" items="${film }">
+${films.title }
+${films.description }
+${films.releaseYear }
+${films.language }
+${films.rating }
+</c:forEach>
 
 	<br>
 	<!-- <a href="searchForFilmByID.html">

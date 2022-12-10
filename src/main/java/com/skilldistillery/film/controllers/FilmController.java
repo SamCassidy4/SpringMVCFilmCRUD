@@ -47,7 +47,7 @@ public class FilmController {
 	public ModelAndView createFilmFromHTML(Film film) {
 		filmDAO.createFilm(film);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("searchForFilmByID.html");
+		mv.setViewName("WEB-INF/redirect.jsp");
 		System.out.println(mv);
 		return mv;
 	}
@@ -56,12 +56,12 @@ public class FilmController {
 	public ModelAndView searchByID(@RequestParam("id")Integer id) {
 		ModelAndView mv = new ModelAndView();
 		Film film = null;
-		filmDAO.findFilmById(id);
+		film = filmDAO.findFilmById(id);
 		if(film == null) {
 			mv.setViewName("WEB-INF/error.jsp");
 		}
 		mv.addObject("film", film);
-		mv.setViewName("searchForFilmByID.html");
+		mv.setViewName("WEB-INF/redirect.jsp");
 		return mv;
 	}
 	@RequestMapping(path = "deleteFilm.do", method= RequestMethod.POST)
