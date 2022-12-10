@@ -10,6 +10,7 @@
 </head>
 <body>
 	<p>
+	ID: ${film.id }
 	Title: <strong> ${film.title } </strong><br>
 	Description:  ${film.description } <br>
 	Released: ${film.releaseYear } <br>

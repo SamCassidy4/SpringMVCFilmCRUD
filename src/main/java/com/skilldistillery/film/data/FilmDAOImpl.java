@@ -358,43 +358,38 @@ public class FilmDAOImpl implements FilmDAO {
 //			ps.setDouble(8, film.getReplacementCost());
 			ps.setString(9, film.getRating());
 //			ps.setString(10, film.getSpecialFeatures());
-
 			int updateCount = ps.executeUpdate();
 			if (updateCount == 1) {
 				ResultSet keys = ps.getGeneratedKeys();
-
 				if (keys.next()) {
 					int actorId = keys.getInt(1);
 					film.setId(actorId);
 					if (film.getActors() != null && film.getActors().size() > 0) {
 						sql = "INSERT INTO film_actor (film_id, actor_id) VALUES (?,?)";
 						ps = conn.prepareStatement(sql);
-
 						for (Actor actor : film.getActors()) {
 							ps.setInt(2, actor.getId());
 							updateCount = ps.executeUpdate();
-
 						}
 					}
-
 				}
-
 			} else {
 				film = null;
 			}
 			conn.close();
 			conn.commit();
-
-		} catch (SQLException e) {
+		}
+		 catch (SQLException e) {
 			System.err.println("Error creating Film");
 			e.printStackTrace();
 		}
 		// "INSERT INTO actor (first_name, last_name) " + " VALUES (?,?)"
-
 		return film;
 
 	}
 
+	
+	
 	public boolean saveFilm(Film film) {
 		String username = "student";
 		String password = "student";
