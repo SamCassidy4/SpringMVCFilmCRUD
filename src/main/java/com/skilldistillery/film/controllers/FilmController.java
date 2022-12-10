@@ -72,6 +72,8 @@ public class FilmController {
 			boolean success = filmDAO.deleteFilm(filmDAO.findFilmById(id));
 			
 			if(success) {
+				mv.setViewName("");
+			} else {
 				mv.setViewName("delete.html");
 			}
 		}
