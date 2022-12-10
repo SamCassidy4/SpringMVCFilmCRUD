@@ -9,8 +9,12 @@
 <title>Film Information!</title>
 </head>
 <body>
-	<p>${film.title } ${film.description } ${film.releaseYear }
-		${film.language } ${film.rating }</p>
+	<p>
+	Title: <strong> ${film.title } </strong><br>
+	Description:  ${film.description } <br>
+	Released: ${film.releaseYear } <br>
+	Language:	${film.language } <br>
+	Rated: ${film.rating }</p>
 	Do you want to delete this film?
 	<form action="delete.do" method="POST" >
 	<input type="hidden" name="id" value="${film.id}">
