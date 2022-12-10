@@ -454,4 +454,8 @@ public class FilmDAOImpl implements FilmDAO {
 		}
 		return true;
 	}
+	
+	//TODO: Create a delete film method returns a boolean
+	//1. Takes in a Film object
+	//2. see notes for example
 }
