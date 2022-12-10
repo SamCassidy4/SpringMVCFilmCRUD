@@ -55,7 +55,7 @@ public class FilmController {
 	@RequestMapping(path ="searchForFilm.do", method=RequestMethod.GET)
 	public ModelAndView searchByID(Film film) {
 		ModelAndView mv = new ModelAndView();
-		
+		mv.setViewName(null);
 		return mv;
 	}
 }
