@@ -347,7 +347,7 @@ public class FilmDAOImpl implements FilmDAO {
 		try {
 			conn = DriverManager.getConnection(URL, username, password);
 			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
+			
 			ps.setString(1, film.getTitle());
 			ps.setString(2, film.getDescription());
 			ps.setInt(3, film.getReleaseYear());
@@ -359,37 +359,20 @@ public class FilmDAOImpl implements FilmDAO {
 //			ps.setDouble(8, film.getReplacementCost());
 //			ps.setString(10, film.getSpecialFeatures());
 			int updateCount = ps.executeUpdate();
+			
+			conn.close();
+			conn.commit();
 			if (updateCount == 1) {
 				ResultSet keys = ps.getGeneratedKeys();
 				if (keys.next()) {
-					int actorId = keys.getInt(1);
-					film.setId(actorId);
-					if (film.getActors() != null && film.getActors().size() > 0) {
-						sql = "INSERT INTO film_actor (film_id, actor_id) VALUES (?,?)";
-						ps = conn.prepareStatement(sql);
-						for (Actor actor : film.getActors()) {
-							ps.setInt(2, actor.getId());
-							updateCount = ps.executeUpdate();
+					int filmId = keys.getInt(1);
+					film.setId(filmId);
 						}
-					}
-				}
+					
 			} else {
 				film = null;
 			}
-			
-				String sql2 ="SELECT LAST_INSERT_ID()";
-				PreparedStatement stmt = conn.prepareStatement(sql2);
-				int filmId = 0;
-				stmt.setInt(1, filmId);
-				ResultSet rs = stmt.executeQuery();
-				if(rs != null) {
-					filmId = rs.getInt("id");
-					film.setId(filmId);
 				}
-				
-			conn.close();
-			conn.commit();
-		}
 		 catch (SQLException e) {
 			System.err.println("Error creating Film");
 			e.printStackTrace();
