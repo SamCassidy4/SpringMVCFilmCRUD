@@ -5,23 +5,29 @@
 <title>MVC Film Site</title>
 </head>
 <body>
-	<h1>SD Movie Database</h1>
+	<h1>SD Film Database</h1>
 
-	<a href="CreateMovie.html">Create a movie</a>
-	<br> Search by Movie ID:
-	<form action="SearchForMovie.do" method="GET">
-		<input type="text" name="id" /> <a href="SearchForMovieByID.html">
-			<input type="submit" value="Search For Movie" /> <!-- UNSURE IS THIS IS INCORRECT -->
+	<a href="createFilm.html">Create a film</a>
+	
+	
+	
+	<br> Search by Film ID:
+	
+	
+	
+	<form action="searchForFilm.do" method="GET">
+		<input type="text" name="id" /> <a href="searchForFilmByID.html">
+			<input type="submit" value="Search For Film" /> <!-- UNSURE IS THIS IS INCORRECT -->
 		</a><br>
+	</form>
 		Check to see if we have a film that matches a keyword:
 		<br>
-		<form action="SearchByKeyword.do" method="GET">
+		<form action="searchByKeyword.do" method="GET">
 		<input type=text name="title"><!-- need to include description too  -->
 		<input type="submit" value="Search By Keyword">
 		</form>
-	</form>
 	<br>
-	<!-- <a href="SearchForMovieByID.html">
+	<!-- <a href="searchForFilmByID.html">
 <input type="submit" value="Search"/>
 </a> -->
 	<!-- THIS LINKS TO THE NEXT PAGE, BUT DOESN'T STORE THE INFORMATION. -->

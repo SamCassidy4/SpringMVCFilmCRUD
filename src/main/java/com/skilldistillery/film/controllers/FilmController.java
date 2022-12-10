@@ -2,6 +2,7 @@ package com.skilldistillery.film.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,8 +25,8 @@ public class FilmController {
 		return "WEB-INF/views/home.jsp";
 	}
 
-//	@RequestMapping(path ="CreateMovie.do", method=RequestMethod.POST)
-//	public ModelAndView searchForMovie(
+//	@RequestMapping(path ="createFilm.do", method=RequestMethod.POST)
+//	public ModelAndView searchForFilm(
 //			@RequestParam("title") String title,
 //			@RequestParam("description") String description,
 //			@RequestParam("releaseYear") Integer releaseYear,
@@ -42,7 +43,7 @@ public class FilmController {
 //		return mv;
 //	}
 
-	@RequestMapping(path = "CreateMovie.do", method = RequestMethod.POST)
+	@RequestMapping(path = "createFilm.do", method = RequestMethod.POST)
 	public ModelAndView createFilmFromHTML(Film film) {
 		filmDAO.createFilm(film);
 		ModelAndView mv = new ModelAndView();
@@ -51,4 +52,10 @@ public class FilmController {
 		return mv;
 	}
 
+	@RequestMapping(path ="searchForFilm.do", method=RequestMethod.GET)
+	public ModelAndView searchByID(Film film) {
+		ModelAndView mv = new ModelAndView();
+		
+		return mv;
+	}
 }

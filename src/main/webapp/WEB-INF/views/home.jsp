@@ -8,11 +8,11 @@
 </head>
 <body>
 
-	<h1>SD Movie Database</h1>
+	<h1>SD Film Database</h1>
 
 
 	<br>
-	<!-- <a href="SearchForMovieByID.html">
+	<!-- <a href="searchForFilmByID.html">
 <input type="submit" value="Search"/>
 </a> -->
 	<!-- THIS LINKS TO THE NEXT PAGE, BUT DOESN'T STORE THE INFORMATION. -->
