@@ -18,12 +18,12 @@ public class FilmController {
 	public void setFilmDAO(FilmDAO filmDAO) {
 		this.filmDAO = filmDAO;
 	}
-	
+
 	@RequestMapping("home.do")
 	public String home() {
 		return "WEB-INF/views/home.jsp";
 	}
-	
+
 //	@RequestMapping(path ="CreateMovie.do", method=RequestMethod.POST)
 //	public ModelAndView searchForMovie(
 //			@RequestParam("title") String title,
@@ -41,13 +41,14 @@ public class FilmController {
 //		film.setRating(rating);filmDAO.createFilm(film);
 //		return mv;
 //	}
-	
-	@RequestMapping(path="CreateMovie.do", method=RequestMethod.POST)
+
+	@RequestMapping(path = "CreateMovie.do", method = RequestMethod.POST)
 	public ModelAndView createFilmFromHTML(Film film) {
 		filmDAO.createFilm(film);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("WEB-INF/home.jsp");
+		System.out.println(mv);
 		return mv;
 	}
-	
+
 }
