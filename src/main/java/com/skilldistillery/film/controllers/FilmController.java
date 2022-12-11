@@ -30,17 +30,17 @@ public class FilmController {
 	public ModelAndView createFilmFromHTML(Film film) {
 		ModelAndView mv = new ModelAndView();
 		Film f = null;
-		try {
+
 			f = filmDAO.createFilm(film);
-		}
-		catch(Exception e) {
-			return mv;
-		}
+
+//		catch(Exception e) {
+//			return mv;
+//		}
 			
 		f = filmDAO.createFilm(film);
 		filmDAO.createFilm(film);
 		
-		mv.setViewName("WEB-INF/redirect.jsp");
+		mv.setViewName("WEB-INF/views/redirect.jsp");
 		mv.addObject("film", film);
 		return mv;
 	}
@@ -54,7 +54,7 @@ public class FilmController {
 			mv.setViewName("WEB-INF/error.jsp");
 		}
 		mv.addObject("film", film);
-		mv.setViewName("WEB-INF/redirect.jsp");
+		mv.setViewName("WEB-INF/views/redirect.jsp");
 		return mv;
 	}
 	@RequestMapping(path = "delete.do", method= RequestMethod.POST)
