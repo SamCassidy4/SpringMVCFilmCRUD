@@ -1,5 +1,7 @@
 package com.skilldistillery.film.controllers;
 
+import java.sql.SQLException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,18 +29,10 @@ public class FilmController {
 
 
 	@RequestMapping(path = "createFilm.do", method = RequestMethod.POST)
-	public ModelAndView createFilmFromHTML(Film film) {
+	public ModelAndView createFilmFromHTML(Film film) throws SQLException {
 		ModelAndView mv = new ModelAndView();
-		Film f = null;
-
-			f = filmDAO.createFilm(film);
-
-//		catch(Exception e) {
-//			return mv;
-//		}
-			
-		f = filmDAO.createFilm(film);
-		filmDAO.createFilm(film);
+		Film f = filmDAO.createFilm(film);
+		
 		
 		mv.setViewName("WEB-INF/views/redirect.jsp");
 		mv.addObject("film", film);
@@ -51,7 +45,7 @@ public class FilmController {
 		Film film = null;
 		film = filmDAO.findFilmById(id);
 		if(film == null) {
-			mv.setViewName("WEB-INF/error.jsp");
+			mv.setViewName("WEB-INF/views/error.jsp");
 		}
 		mv.addObject("film", film);
 		mv.setViewName("WEB-INF/views/redirect.jsp");
@@ -64,9 +58,9 @@ public class FilmController {
 			boolean success = filmDAO.deleteFilm(filmDAO.findFilmById(id));
 			
 			if(success) {
-				mv.setViewName("WEB-INF/sucess.jsp");
+				mv.setViewName("WEB-INF/views/sucess.jsp");
 			} else {
-				mv.setViewName("WEB-INF/deleteError.jsp");
+				mv.setViewName("WEB-INF/views/deleteError.jsp");
 			}
 		return mv;
 	}

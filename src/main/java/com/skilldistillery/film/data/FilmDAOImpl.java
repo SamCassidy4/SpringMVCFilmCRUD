@@ -57,7 +57,6 @@ public class FilmDAOImpl implements FilmDAO {
 				film.setRating(rs.getString("rating"));
 				film.setSpecialFeatures(rs.getString("special_features"));
 				film.setActors(findActorsByFilmId(filmId));
-
 			}
 			pstmt.close();
 			conn.close();
@@ -477,4 +476,5 @@ public class FilmDAOImpl implements FilmDAO {
 		}
 		return true;
 	}
+
 }
