@@ -112,14 +112,15 @@ public class FilmController {
 			mv.setViewName("WEB-INF/index.html");
 		}
 		
-		mv.setViewName("WEB-INF/views/redirect.jsp");
+		mv.setViewName("WEB-INF/views/edit.jsp");
+		
 		return mv;
 	}
 	
 //	@RequestMapping(path="editComplete.do")
 	
 	@RequestMapping(path = "findFilmByKeyword.do", method = RequestMethod.POST)
-	public ModelAndView findFilmsByKeyword(@RequestParam("keyWord")String kw) {
+	public ModelAndView findFilmsByKeyword(@RequestParam("kw")String kw) {
 		ModelAndView mv = new ModelAndView();
 		List<Film> films = new ArrayList<>();
 		
@@ -135,7 +136,7 @@ public class FilmController {
 			return mv;
 		}
 		mv.addObject("films", films);
-		mv.setViewName("WEB-INF/views/redirect.jsp");
+		mv.setViewName("WEB-INF/views/keyword.jsp");
 		
 		return mv;
 		
