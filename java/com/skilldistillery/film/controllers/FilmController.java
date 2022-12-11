@@ -41,6 +41,7 @@ public class FilmController {
 			@RequestParam("specialFeatures") String specialFeatures) throws SQLException {
 		ModelAndView mv = new ModelAndView();
 		Film f = new Film();
+		
 		f.setTitle(title);
 		f.setDescription(description);
 		f.setReleaseYear(releaseYear);
@@ -81,7 +82,7 @@ public class FilmController {
 		boolean success = filmDAO.deleteFilm(filmDAO.findFilmById(id));
 		// System.out.println(success);
 		if (success) {
-			mv.setViewName("WEB-INF/views/sucess.jsp");
+			mv.setViewName("WEB-INF/views/success.jsp");
 		} else {
 			mv.setViewName("WEB-INF/views/deleteError.jsp");
 		}
@@ -103,8 +104,7 @@ public class FilmController {
 			}
 			if(toEdit != null) {
 				mv.addObject("film", toEdit);
-				mv.setViewName("WEB-INF/views/redirect.jsp");
-				return mv;
+				mv.setViewName("WEB-INF/views/edit.jsp");
 			} else {
 				mv.setViewName("WEB-INF/views/error.jsp");
 			}
@@ -115,6 +115,8 @@ public class FilmController {
 		mv.setViewName("WEB-INF/views/redirect.jsp");
 		return mv;
 	}
+	
+//	@RequestMapping(path="editComplete.do")
 	
 	@RequestMapping(path = "findFilmByKeyword.do", method = RequestMethod.POST)
 	public ModelAndView findFilmsByKeyword(@RequestParam("keyWord")String kw) {

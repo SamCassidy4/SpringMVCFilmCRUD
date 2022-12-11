@@ -2,38 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Film Information!</title>
+<title>Edit</title>
 </head>
 <body>
-	
-	${film}
-
-
-	<form action="delete.do" method="post">
-		<P>
-			<p>Would you Like to delete this film?</p>
-			 <input type="radio"name="deleteFilm" value="yes"> <label>Yes</label> 
-			 <input type="radio" name="deleteFilm" value="no"> <label>No</label><br>
-				<input type="text" hidden="true" name="id" value="${film.id}">
-				<input type="submit" value="Submit">
-	</form>
-
-
+<h3>Edit details:</h3>
 	<form action="edit.do" method="POST">
-		<p>Would you like to edit this film? </p>
-		
-		<input type="radio" name="editFilm" value="yes"> <label>Yes</label>
-		<input type="radio" name="editFilm" value="no"><label>No</label>
-			<input type="text" hidden="true" name="id" value="${film.id}">
-			<input type="submit" value="Submit">
-
-			
-			
-		<%-- 	<input
+		<p>
+			Would you like to edit this film? <label for="title">Title:</label> <input
 				type="text" name="title" value="${film.title }" required><br> <label
 				for="description">Description:</label> <input type="text"
 				name="description" value="${film.description }" required><br> <label
@@ -67,7 +47,10 @@
 				name="replacementCost" value="${film.replacementCost }"required><br>
 			<label for="specialFeatures">Special Features:</label> <input
 				type="text" name="specialFeatures" value="${film.specialFeatures }"required><br>
-			<button type="submit" class="btn btn-primary">Edit</button> --%>
+		<input type="radio" name="completed" value="yes"> <label>Yes</label>
+		<input type="radio" name="completed" value="no"><label>No</label>
+			<input type="text" hidden="true" name="id" value="${film.id}">
+			<input type="submit" value="Submit">
 	</form>
 </body>
 </html>
