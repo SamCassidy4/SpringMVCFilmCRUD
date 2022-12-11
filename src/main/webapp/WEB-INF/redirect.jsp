@@ -9,22 +9,27 @@
 <title>Film Information!</title>
 </head>
 <body>
-	<p>
-	${film } <br>
-	Title: <strong> ${film.title } </strong><br>
-	Description:  ${film.description } <br>
-	Released: ${film.releaseYear } <br>
-	Language:	${film.language } <br>
-	Rated: ${film.rating }</p>
-	Do you want to delete this film?
-	<form action="delete.do" method="GET" >
-	<input type="hidden" name="id" value="${film.id}">
-	<input type="text" name="film" value ="${film}">
-	 <button>Delete</button>
+	${film}<br>
+	Cast: ${film.actors}
 	
-	</form>
 	
-	<br> Do you want to edit it?
-	<a href="edit.html">Edit</a>
+	<form action = "delete.do" method="post">
+		<P> Would you Like to delete this film?
+		<input type ="radio" name="deleteFilm" value="yes"> <label>Yes</lable>
+		<input type = "radio" name="deleteFilm" value="no"> <lable>No</lable><br>
+		<input type ="text" hidden ="true" name="id" value="${film.id}">
+		<input type ="submit" value="submit">
+		</form>
+		
+		
+		<form action="edit.do" method="post">
+		<p> Would you like to edit this film?
+		<input type="radio" name="editFilm" value="yes"><label>Yes</label>
+		<input type="radio" name="editFilm" value="no"><label>No</label>
+		<input type="text" hidden="true" name="id" value="${film.id}">
+		<input type="submit" value="submit">
+		
+		
+		</form>
 </body>
 </html>

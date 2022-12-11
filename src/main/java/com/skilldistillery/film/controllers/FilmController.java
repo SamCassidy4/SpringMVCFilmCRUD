@@ -27,13 +27,23 @@ public class FilmController {
 
 
 	@RequestMapping(path = "createFilm.do", method = RequestMethod.POST)
-	public ModelAndView createFilmFromHTML(Film film) {
-		filmDAO.createFilm(film);
-		
-		System.out.println(film.getId());
+	public ModelAndView createFilm(Film film) {
 		ModelAndView mv = new ModelAndView();
+		Film f = null;
+		try {
+			f = filmDAO.createFilm(film);
+		}
+		catch(Exception e) {
+			return mv;
+		}
+			
+		if(f.equals(null)) {
+			mv.setViewName("WEB-INF/error.jsp");
+			return mv;
+		}
+		
+		mv.addObject("film", film);
 		mv.setViewName("WEB-INF/redirect.jsp");
-		System.out.println(mv);
 		return mv;
 	}
 

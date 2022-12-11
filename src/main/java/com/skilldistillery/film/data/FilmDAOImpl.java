@@ -336,48 +336,57 @@ public class FilmDAOImpl implements FilmDAO {
 		return true;
 	}
 
-	public Film createFilm(Film film) {
+	public Film createFilm(Film film)  {
 		String username = "student";
 		String password = "student";
 
-		String sql = "INSERT INTO film (title, description, release_year, language_id, rental_duration, rental_rate, length, replacement_cost, rating, special_features VALUES(?,?,?,?,?,?,?,?,?,?);";
 
 		Connection conn = null;
 
 		try {
+			conn.setAutoCommit(false);
+			String sql="INSERT INTO film(title, description, release_year, rental_duration, rental_rate, length, replacement_cost, rating, special_features) VALUES (?,?,?,?,?,?,?,?,?,?)";
 			conn = DriverManager.getConnection(URL, username, password);
 			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			
 			ps.setString(1, film.getTitle());
 			ps.setString(2, film.getDescription());
 			ps.setInt(3, film.getReleaseYear());
-			ps.setString(4, film.getRating());
-//			ps.setInt(4, film.getLanguageId());
-//			ps.setInt(5, film.getRentalDuration());
-//			ps.setDouble(6, film.getRentalRate());
+//			ps.setInt(4, film.getRentalDuration());
+//			ps.setDouble(5, film.getRentalRate());
 //			ps.setInt(7, film.getLength());
 //			ps.setDouble(8, film.getReplacementCost());
-//			ps.setString(10, film.getSpecialFeatures());
+			ps.setString(9, film.getRating());
+			//ps.setString(10, film.getSpecialFeatures());
 			int updateCount = ps.executeUpdate();
 			
-			conn.close();
-			conn.commit();
 			if (updateCount == 1) {
 				ResultSet keys = ps.getGeneratedKeys();
-				if (keys.next()) {
-					int filmId = keys.getInt(1);
-					film.setId(filmId);
+				if(keys.next()) {
+					int newId = keys.getInt(1);
+					film.setId(newId);
+					if(film.getActors() != null && film.getActors().size() > 0) {
+						sql = "INSERT INTO film_acto (film_id, actor_id) VALUES (?,?)";
+						ps=conn.prepareStatement(sql);
+						ps.setInt(1, film.getId());
+						
+						for (Actor actor : film.getActors()) {
+							ps.setInt(2, actor.getId());
+							updateCount = ps.executeUpdate();
+							
 						}
-					
+					}
+				}
+				
 			} else {
 				film = null;
 			}
-				}
-		 catch (SQLException e) {
+			conn.commit();
+			conn.close();
+		} catch (SQLException e) {
 			System.err.println("Error creating Film");
 			e.printStackTrace();
 		}
-		// "INSERT INTO actor (first_name, last_name) " + " VALUES (?,?)"
 		return film;
 
 	}
