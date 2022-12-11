@@ -358,7 +358,8 @@ public class FilmDAOImpl implements FilmDAO {
 			ps.setString(9, film.getRating());
 			// ps.setString(10, film.getSpecialFeatures());
 			int updateCount = ps.executeUpdate();
-
+			conn.commit();
+			conn.close();
 			if (updateCount == 1) {
 				ResultSet keys = ps.getGeneratedKeys();
 				if (keys.next()) {
@@ -371,7 +372,6 @@ public class FilmDAOImpl implements FilmDAO {
 				film = null;
 			}
 			conn.commit();
-			conn.close();
 		} catch (SQLException e) {
 			System.err.println("Error creating Film");
 			e.printStackTrace();
