@@ -42,11 +42,14 @@ public class FilmController {
 		ModelAndView mv = new ModelAndView();
 		Film film = null;
 		film = filmDAO.findFilmById(id);
+		System.out.println(film);
 		if (film == null) {
 			mv.setViewName("WEB-INF/views/error.jsp");
+		} else {
+			mv.addObject("film", film);
+			mv.setViewName("WEB-INF/views/redirect.jsp");
 		}
-		mv.addObject("film", film);
-		mv.setViewName("WEB-INF/views/redirect.jsp");
+
 		return mv;
 	}
 
@@ -83,7 +86,6 @@ public class FilmController {
 		filmEdit.setRentalRate(rentalRate);
 		filmEdit.setReplacementCost(replacementCost);
 		filmEdit.setSpecialFeatures(specialFeatures);
-
 		mv.setViewName("WEB-INF/views/redirect.jsp");
 		return mv;
 	}

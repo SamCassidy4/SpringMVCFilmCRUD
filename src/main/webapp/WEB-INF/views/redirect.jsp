@@ -34,7 +34,7 @@
 	</form>
 
 
-	<form action="edit.do" method="post">
+	<form action="edit.do" method="POST">
 		<p>
 			Would you like to edit this film? <label for="title">Title:</label> <input
 				type="text" name="title" value="${film.title }" required><br> <label
