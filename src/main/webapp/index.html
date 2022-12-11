@@ -8,24 +8,25 @@
 	<h1>SD Film Database</h1>
 
 	<a href="createFilm.html">Create a film</a>
-	
-	
-	
+
+	<br>
+
 	<br> Search by Film ID:
-	
-	
-	
+
+
+
 	<form action="searchForFilmId.do" method="GET">
 		<input type="text" name="id" /> <a href="searchForFilmByID.html">
 			<input type="submit" value="Search For Film" /> <!-- UNSURE IS THIS IS INCORRECT -->
 		</a><br>
 	</form>
-		Check to see if we have a film that matches a keyword:
-		<br>
-		<form action="searchByKeyword.do" method="GET">
-		<input type=text name="title"><!-- need to include description too  -->
+	Check to see if we have a film that matches a keyword:
+	<br>
+	<form action="searchByKeyword.do" method="GET">
+		<input type=text name="title">
+		<!-- need to include description too  -->
 		<input type="submit" value="Search By Keyword">
-		</form>
+	</form>
 	<br>
 	<!-- <a href="searchForFilmByID.html">
 <input type="submit" value="Search"/>

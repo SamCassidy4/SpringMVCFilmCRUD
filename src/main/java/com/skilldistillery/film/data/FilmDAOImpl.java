@@ -459,7 +459,7 @@ public class FilmDAOImpl implements FilmDAO {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, film.getId());
 			updateCount = ps.executeUpdate();
-
+			System.out.println(updateCount);
 			conn.close();
 			conn.commit();
 
@@ -477,4 +477,5 @@ public class FilmDAOImpl implements FilmDAO {
 		return true;
 	}
 
+	
 }
