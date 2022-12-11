@@ -29,12 +29,32 @@ public class FilmController {
 	}
 
 	@RequestMapping(path = "createFilm.do", method = RequestMethod.POST)
-	public ModelAndView createFilmFromHTML(Film film) throws SQLException {
+	public ModelAndView createFilmFromHTML(@RequestParam("title") String title, 
+			@RequestParam("description") String description,
+			@RequestParam("releaseYear") Integer releaseYear, 
+			@RequestParam("languageId") Integer languageId,
+			@RequestParam("length") Integer length, 
+			@RequestParam("rating") String rating,
+			@RequestParam("rentalDuration") Integer rentalDuration, 
+			@RequestParam("rentalRate") Double rentalRate,
+			@RequestParam("replacementCost") Double replacementCost,
+			@RequestParam("specialFeatures") String specialFeatures) throws SQLException {
 		ModelAndView mv = new ModelAndView();
-		Film f = filmDAO.createFilm(film);
+		Film f = new Film();
+		f.setTitle(title);
+		f.setDescription(description);
+		f.setReleaseYear(releaseYear);
+		f.setLanguageId(languageId);
+		f.setLength(12);
+		f.setRating(rating);
+		f.setRentalDuration(rentalDuration);
+		f.setRentalRate(rentalRate);
+		f.setReplacementCost(replacementCost);
+		f.setSpecialFeatures(specialFeatures);
+		f = filmDAO.createFilm(f);
 		System.out.println(f.getId());
+		mv.addObject("film", f);
 		mv.setViewName("WEB-INF/views/redirect.jsp");
-		mv.addObject("film", film);
 		return mv;
 	}
 

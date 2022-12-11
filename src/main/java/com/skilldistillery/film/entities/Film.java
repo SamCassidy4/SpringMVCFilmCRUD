@@ -177,10 +177,4 @@ public class Film {
 				+ " \n Features: " + specialFeatures + "\n Actors: " + actors + " \n Language: " + language;
 	}
 
-
-	public void add(Film film) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
