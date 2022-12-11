@@ -27,7 +27,7 @@ public class FilmController {
 
 
 	@RequestMapping(path = "createFilm.do", method = RequestMethod.POST)
-	public ModelAndView createFilm(Film film) {
+	public ModelAndView createFilmFromHTML(Film film) {
 		ModelAndView mv = new ModelAndView();
 		Film f = null;
 		try {
@@ -37,13 +37,11 @@ public class FilmController {
 			return mv;
 		}
 			
-		if(f.equals(null)) {
-			mv.setViewName("WEB-INF/error.jsp");
-			return mv;
-		}
+		f = filmDAO.createFilm(film);
+		filmDAO.createFilm(film);
 		
-		mv.addObject("film", film);
 		mv.setViewName("WEB-INF/redirect.jsp");
+		mv.addObject("film", film);
 		return mv;
 	}
 

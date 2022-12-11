@@ -336,19 +336,18 @@ public class FilmDAOImpl implements FilmDAO {
 		return true;
 	}
 
-	public Film createFilm(Film film)  {
+	public Film createFilm(Film film) {
 		String username = "student";
 		String password = "student";
-
 
 		Connection conn = null;
 
 		try {
 			conn.setAutoCommit(false);
-			String sql="INSERT INTO film(title, description, release_year, rental_duration, rental_rate, length, replacement_cost, rating, special_features) VALUES (?,?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO film(title, description, release_year, rental_duration, rental_rate, length, replacement_cost, rating, special_features) VALUES (?,?,?,?,?,?,?,?,?,?)";
 			conn = DriverManager.getConnection(URL, username, password);
 			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			
+
 			ps.setString(1, film.getTitle());
 			ps.setString(2, film.getDescription());
 			ps.setInt(3, film.getReleaseYear());
@@ -357,27 +356,17 @@ public class FilmDAOImpl implements FilmDAO {
 //			ps.setInt(7, film.getLength());
 //			ps.setDouble(8, film.getReplacementCost());
 			ps.setString(9, film.getRating());
-			//ps.setString(10, film.getSpecialFeatures());
+			// ps.setString(10, film.getSpecialFeatures());
 			int updateCount = ps.executeUpdate();
-			
+
 			if (updateCount == 1) {
 				ResultSet keys = ps.getGeneratedKeys();
-				if(keys.next()) {
+				if (keys.next()) {
 					int newId = keys.getInt(1);
 					film.setId(newId);
-					if(film.getActors() != null && film.getActors().size() > 0) {
-						sql = "INSERT INTO film_acto (film_id, actor_id) VALUES (?,?)";
-						ps=conn.prepareStatement(sql);
-						ps.setInt(1, film.getId());
-						
-						for (Actor actor : film.getActors()) {
-							ps.setInt(2, actor.getId());
-							updateCount = ps.executeUpdate();
-							
-						}
-					}
+
 				}
-				
+
 			} else {
 				film = null;
 			}
@@ -387,12 +376,11 @@ public class FilmDAOImpl implements FilmDAO {
 			System.err.println("Error creating Film");
 			e.printStackTrace();
 		}
+
 		return film;
 
 	}
 
-	
-	
 	public boolean saveFilm(Film film) {
 		String username = "student";
 		String password = "student";
@@ -471,21 +459,21 @@ public class FilmDAOImpl implements FilmDAO {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, film.getId());
 			updateCount = ps.executeUpdate();
-			
+
 			conn.close();
 			conn.commit();
-			
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			if (conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException sqle2) {
+					System.err.println("Error trying to rollback");
+				}
+			}
+			return false;
 		}
-		catch (SQLException sqle) {
-		    sqle.printStackTrace();
-		    if (conn != null) {
-		      try { conn.rollback(); }
-		      catch (SQLException sqle2) {
-		        System.err.println("Error trying to rollback");
-		      }
-		    }
-		    return false;
-		  }
-		  return true;
-		}
+		return true;
+	}
 }
