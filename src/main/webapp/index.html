@@ -7,33 +7,40 @@
 <body>
 	<h1>SD Film Database</h1>
 
-	<a href="createFilm.html">Create a film</a>
-
-	<br>
-
-	<br> Search by Film ID:
-
-
-
-	<form action="searchForFilmId.do" method="GET">
-		<input type="text" name="id" /> <a href="searchForFilmByID.html">
-			<input type="submit" value="Search For Film" /> <!-- UNSURE IS THIS IS INCORRECT -->
-		</a><br>
+	<div>
+	<h3>Search By: </h3>
+	<form action="searchForFilmId.do", method="post">
+	<label for="filmId">Film ID</label>
+	<input type="text" name="id">
+	<input type="submit" value="Search For Film">
 	</form>
-	Check to see if we have a film that matches a keyword:
-	<br>
-	<form action="searchByKeyword.do" method="GET">
-		<input type=text name="title">
-		<!-- need to include description too  -->
-		<input type="submit" value="Search By Keyword">
+	
+	<form action="findFilmByKeyword.do" method="post">
+	<label for ="keyWord">Keyword: </label>
+	<input type ="text" name="keyWord">
+	<input type="submit" value="Search For Film">
 	</form>
-	<br>
-	<!-- <a href="searchForFilmByID.html">
-<input type="submit" value="Search"/>
-</a> -->
-	<!-- THIS LINKS TO THE NEXT PAGE, BUT DOESN'T STORE THE INFORMATION. -->
-	<br>
-
+	</div>
+	
+	
+	<div>
+		<h3>Create a New Film</h3>
+		<form action="createFilm.do" method="post" >
+			<label for="title">Title:</label> <input type="text" name="title">
+			<label for="description">Description:</label> <input type="text" name="description">
+			<label for="releaseYear">Release Year:</label> <input type="number" name="releaseYear">
+			<label for="languageId">Language ID:</label> <input type="number" name="languageId">
+			<label for="rentalDuration">Rental Duration:</label> <input type="number" name="rentalDuration">
+			<label for="rentalRate">Rental Rate:</label> <input type="number" name="rentalRate">
+			<label for="length">Length:</label> <input type="number" name="rentalRate">
+			<label for="replacementCost">Replacement Cost:</label> <input type="number" name="replacementCost">
+			<label for="rating">Rating:</label> <input type="text" name="rating">
+			<label for="specialFeatures">Special Features:</label> <input type="text" name="specialFeatures">
+			<input type="submit" value="Submit">
+			</form>
+	
+	
+	</div>
 
 </body>
 </html>

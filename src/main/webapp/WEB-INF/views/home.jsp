@@ -12,11 +12,11 @@
 
 	<h1>SD Film Database</h1>
 	<c:forEach var="films" items="${film }">
-${films.title }
-${films.description }
-${films.releaseYear }
-${films.language }
-${films.rating }
+${film.title }
+${film.description }
+${film.releaseYear }
+${film.language }
+${film.rating }
 </c:forEach>
 
 	<br>

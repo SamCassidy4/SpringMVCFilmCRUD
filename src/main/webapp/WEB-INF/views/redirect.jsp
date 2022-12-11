@@ -9,34 +9,31 @@
 <title>Film Information!</title>
 </head>
 <body>
-	${film.id}
-	<br> Title
-	<strong>${film.title}</strong>
-	<br> Description: ${film.description }
-	<br> Released: ${film.releaseYear }
-	<br> Language: ${film.language }
-	<br> Length: ${film.length }
-	<br> Rating: ${film.rating }
-	<br> Rental Duration: ${film.rentalDuration }
-	<br> Rental Rate: ${film.rentalRate }
-	<br> Replacement Cost: ${film.replacementCost }
-	<br> Special features: ${film.specialFeatures }
-	<br> Cast: ${film.actors}
+	
+	${film}
 
 
 	<form action="delete.do" method="post">
 		<P>
-			Would you Like to delete this film? <input type="radio"
-				name="deleteFilm" value="yes"> <label>Yes</lable> <input
-				type="radio" name="deleteFilm" value="no"> <lable>No</lable><br>
+			<p>Would you Like to delete this film?</p>
+			 <input type="radio"name="deleteFilm" value="yes"> <label>Yes</lable> 
+			 <inputtype="radio" name="deleteFilm" value="no"> <lable>No</lable><br>
 				<input type="text" hidden="true" name="id" value="${film.id}">
-				<input type="submit" value="submit">
+				<input type="submit" value="Submit">
 	</form>
 
 
 	<form action="edit.do" method="POST">
-		<p>
-			Would you like to edit this film? <label for="title">Title:</label> <input
+		<p>Would you like to edit this film? </p>
+		
+		<input type="radio" name="editFilm" value="yes"> <label>Yes</label>
+		<inputtype="radio" name="editFilm" value="no"><label>No</label>
+			<input type="text" hidden="true" name="id" value="${film.id}">
+			<input type="submit" value="Submit">
+			<label for="title">Title:</label> 
+			
+			
+		<%-- 	<input
 				type="text" name="title" value="${film.title }" required><br> <label
 				for="description">Description:</label> <input type="text"
 				name="description" value="${film.description }" required><br> <label
@@ -70,7 +67,7 @@
 				name="replacementCost" value="${film.replacementCost }"required><br>
 			<label for="specialFeatures">Special Features:</label> <input
 				type="text" name="specialFeatures" value="${film.specialFeatures }"required><br>
-			<button type="submit" class="btn btn-primary">Edit</button>
+			<button type="submit" class="btn btn-primary">Edit</button> --%>
 	</form>
 </body>
 </html>

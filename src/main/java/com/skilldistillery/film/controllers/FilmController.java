@@ -1,6 +1,8 @@
 package com.skilldistillery.film.controllers;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.skilldistillery.film.data.FilmDAO;
 import com.skilldistillery.film.entities.Film;
@@ -37,7 +38,7 @@ public class FilmController {
 		return mv;
 	}
 
-	@RequestMapping(path = "searchForFilmId.do", method = RequestMethod.GET)
+	@RequestMapping(path = "searchForFilmId.do", method = RequestMethod.POST)
 	public ModelAndView searchByID(@RequestParam("id") Integer id) {
 		ModelAndView mv = new ModelAndView();
 		Film film = null;
@@ -69,25 +70,68 @@ public class FilmController {
 	}
 
 	@RequestMapping(path = "edit.do", method = RequestMethod.POST)
-	public ModelAndView editFilm(@RequestParam("title") String title, @RequestParam("description") String description,
-			@RequestParam("releaseYear") Integer releaseYear, @RequestParam("language") String language,
-			@RequestParam("length") Integer length, @RequestParam("rating") String rating,
-			@RequestParam("rentalDuration") Integer rentalDuration, @RequestParam("rentalRate") Double rentalRate,
-			@RequestParam("replacementCost") Double replacementCost,
-			@RequestParam("specialFeatures") String specialFeatures) {
+	public ModelAndView editFilm(@RequestParam("editFilm") String edit, @RequestParam("id") String id) {
 		ModelAndView mv = new ModelAndView();
-		Film filmEdit = new Film();
-		filmEdit.setTitle(title);
-		filmEdit.setDescription(description);
-		filmEdit.setReleaseYear(releaseYear);
-		filmEdit.setLanguage(language);
-		filmEdit.setRating(rating);
-		filmEdit.setRentalDuration(rentalDuration);
-		filmEdit.setRentalRate(rentalRate);
-		filmEdit.setReplacementCost(replacementCost);
-		filmEdit.setSpecialFeatures(specialFeatures);
+		if (edit.toUpperCase().equals("YES")) {
+			Film toEdit = null;
+			
+			try {
+				toEdit = filmDAO.findFilmById(Integer.valueOf(id));
+			}
+			catch(Exception e) {
+				mv.setViewName("WEB-INF/views/error.jsp");
+			}
+			if(toEdit != null) {
+				mv.addObject("film", toEdit);
+				mv.setViewName("WEB-INF/views/redirect.jsp");
+				return mv;
+			} else {
+				mv.setViewName("WEB-INF/views/error.jsp");
+			}
+		} else {
+			mv.setViewName("WEB-INF/index.html");
+		}
+		
 		mv.setViewName("WEB-INF/views/redirect.jsp");
 		return mv;
+	}
+	
+	@RequestMapping(path = "findFilmByKeyword.do", method = RequestMethod.POST)
+	public ModelAndView findFilmsByKeyword(@RequestParam("keyWord")String kw) {
+		ModelAndView mv = new ModelAndView();
+		List<Film> films = new ArrayList<>();
+		
+		if(kw.equals("")) {
+			mv.setViewName("WEB-INF/views/error.jsp");
+			return mv;
+		}
+		else {
+			films = filmDAO.findFilmByKeyword(kw);
+		}
+		if(films.size() == 0) {
+			mv.setViewName("WEB-INF/views/error.jsp");
+			return mv;
+		}
+		mv.addObject("films", films);
+		mv.setViewName("WEB-INF/views/redirect.jsp");
+		
+		return mv;
+		
+	}
+	@RequestMapping(path = "updateFilm.do", method = RequestMethod.POST)
+	public ModelAndView updateFilm(Film film) {
+		ModelAndView mv = new ModelAndView();
+		
+		boolean success = filmDAO.saveFilm(film);
+		if(success) {
+			mv.addObject("film",film);
+			mv.setViewName("WEB-INF/views/redirect.jsp");
+			return mv;
+		}
+		else {
+			mv.setViewName("WEB-INF/views/error.jsp");
+			return mv;
+		}
 	}
 
 }

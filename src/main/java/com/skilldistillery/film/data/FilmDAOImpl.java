@@ -339,46 +339,51 @@ public class FilmDAOImpl implements FilmDAO {
 		String username = "student";
 		String password = "student";
 
-		Connection conn = null;
-
-		try {
-			conn = DriverManager.getConnection(URL, username, password);
+		try (Connection conn = DriverManager.getConnection(URL, username, password)) {
 			conn.setAutoCommit(false);
-			String sql = "INSERT INTO film(title, description, release_year, rental_duration, rental_rate, length, replacement_cost, rating, special_features) VALUES (?,?,?,?,?,?,?,?,?,?)";
-			conn = DriverManager.getConnection(URL, username, password);
+			String sql = "INSERT INTO film (title, language_id, description, release_year, rental_duration, rental_rate, length, replacement_cost, rating, special_features) VALUES (?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-
 			ps.setString(1, film.getTitle());
-			ps.setString(2, film.getDescription());
-			ps.setInt(3, film.getReleaseYear());
-//			ps.setInt(4, film.getRentalDuration());
-//			ps.setDouble(5, film.getRentalRate());
-//			ps.setInt(7, film.getLength());
-//			ps.setDouble(8, film.getReplacementCost());
+			ps.setInt(2, film.getLanguageId());
+			ps.setString(3, film.getDescription());
+			ps.setInt(4, film.getReleaseYear());
+			ps.setInt(5, film.getRentalDuration());
+			ps.setDouble(6, film.getRentalRate());
+			ps.setInt(7, film.getLength());
+			ps.setDouble(8, film.getReplacementCost());
 			ps.setString(9, film.getRating());
-			// ps.setString(10, film.getSpecialFeatures());
+			ps.setString(10, film.getSpecialFeatures());
+
 			int updateCount = ps.executeUpdate();
-			conn.commit();
-			conn.close();
 			if (updateCount == 1) {
 				ResultSet keys = ps.getGeneratedKeys();
 				if (keys.next()) {
 					int newId = keys.getInt(1);
 					film.setId(newId);
+					if (film.getActors() != null && film.getActors().size() > 0) {
+						sql = "INSERT INTO film_actor (film_id, actor_id) VALUES (?,?)";
+						ps = conn.prepareStatement(sql);
 
+						ps.setInt(1, film.getId());
+
+						for (Actor actor : film.getActors()) {
+							ps.setInt(2, actor.getId());
+							updateCount = ps.executeUpdate();
+
+						}
+					}
 				}
-
 			} else {
 				film = null;
 			}
 			conn.commit();
-		} catch (SQLException e) {
-			System.err.println("Error creating Film");
-			e.printStackTrace();
+
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+
+			throw new RuntimeException("Error inserting film " + film);
 		}
-
 		return film;
-
 	}
 
 	public boolean saveFilm(Film film) {
@@ -391,7 +396,7 @@ public class FilmDAOImpl implements FilmDAO {
 			conn = DriverManager.getConnection(URL, username, password);
 			conn.setAutoCommit(false);
 
-			String sql = "UPDATE film SET title=?, rating=? , description=?, release_year=?, language_id=?, rental_duration=?, rental_rate=?, length=?, replacement_cost=?, special_features=? WHERE id=?";
+			String sql = "UPDATE film SET title=? , rating=?, description=?, release_year=?, language_id=?, rental_duration=?, rental_rate=?, length=?, replacement_cost=?, special_features=? WEHRE id=?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 
 			ps.setString(1, film.getTitle() == null ? "" : film.getTitle());
@@ -427,8 +432,8 @@ public class FilmDAOImpl implements FilmDAO {
 					}
 				}
 
-				conn.close();
 				conn.commit();
+				conn.close();
 
 			}
 
@@ -460,8 +465,8 @@ public class FilmDAOImpl implements FilmDAO {
 			ps.setInt(1, film.getId());
 			updateCount = ps.executeUpdate();
 			System.out.println(updateCount);
-			conn.close();
 			conn.commit();
+			conn.close();
 
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
@@ -477,5 +482,4 @@ public class FilmDAOImpl implements FilmDAO {
 		return true;
 	}
 
-	
 }
