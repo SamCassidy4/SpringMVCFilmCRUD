@@ -16,7 +16,7 @@
   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="NO">
   <label class="form-check-label" for="inlineRadio2">No</label>
 </div>
-	<button type="submit" class="btn btn-primary">Submit</button>
+	<button type="submit" value="Add Film">Submit</button>
 
 </form>
 </body>
