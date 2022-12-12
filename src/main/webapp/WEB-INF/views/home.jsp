@@ -17,6 +17,23 @@ ${film.description }
 ${film.releaseYear }
 ${film.language }
 ${film.rating }
+	<form action="delete.do" method="post">
+		<P>
+			<p>Would you Like to delete this film?</p>
+			 <input type="radio"name="deleteFilm" value="yes"> <label>Yes</label> 
+				<input type="text" hidden="true" name="id" value="${film.id}">
+				<input type="submit" value="Submit">
+	</form>
+
+
+	<form action="edit.do" method="post">
+		<p>Would you like to edit this film? </p>
+		
+		<input type="radio" name="editFilm" value="YES"> <label>Yes</label>
+			<input type="text" hidden="true" name="id" value="${film.id}">
+			<input type="submit" value="Submit">
+
+	</form>
 </c:forEach>
 
 	<br>

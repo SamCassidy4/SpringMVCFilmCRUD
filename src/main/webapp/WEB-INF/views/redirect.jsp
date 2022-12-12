@@ -27,7 +27,6 @@
 		<P>
 			<p>Would you Like to delete this film?</p>
 			 <input type="radio"name="deleteFilm" value="yes"> <label>Yes</label> 
-			 <input type="radio" name="deleteFilm" value="no"> <label>No</label><br>
 				<input type="text" hidden="true" name="id" value="${film.id}">
 				<input type="submit" value="Submit">
 	</form>
@@ -37,7 +36,6 @@
 		<p>Would you like to edit this film? </p>
 		
 		<input type="radio" name="editFilm" value="YES"> <label>Yes</label>
-		<input type="radio" name="editFilm" value="NO"><label>No</label>
 			<input type="text" hidden="true" name="id" value="${film.id}">
 			<input type="submit" value="Submit">
 

@@ -14,7 +14,6 @@
   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="deleteFilm">
   <label class="form-check-label" for="inlineRadio1">Yes</label>
   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="NO">
-  <label class="form-check-label" for="inlineRadio2">No</label>
 </div>
 	<button type="submit" value="Add Film">Submit</button>
 
