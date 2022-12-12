@@ -23,14 +23,13 @@ public class FilmController {
 		this.filmDAO = filmDAO;
 	}
 
-//	@RequestMapping("home.do")
-//	public String home() {
-//		return "WEB-INF/views/home.jsp";
-//	}
+	@RequestMapping("home.do")
+	public String home() {
+		return "WEB-INF/views/home.jsp";
+	}
 
 	@RequestMapping(path = "createFilm.do", method = RequestMethod.POST)
-	public ModelAndView createFilmFromHTML(
-			@RequestParam("title") String title,
+	public ModelAndView createFilmFromHTML(@RequestParam("title") String title,
 			@RequestParam("description") String description, @RequestParam("releaseYear") Integer releaseYear,
 			@RequestParam("languageId") Integer languageId, @RequestParam("length") Integer length,
 			@RequestParam("rating") String rating, @RequestParam("rentalDuration") Integer rentalDuration,
@@ -38,26 +37,39 @@ public class FilmController {
 			@RequestParam("specialFeatures") String specialFeatures) {
 		ModelAndView mv = new ModelAndView();
 		Film f = new Film();
-		
 		f.setTitle(title);
 		f.setDescription(description);
 		f.setReleaseYear(releaseYear);
 		f.setLanguageId(languageId);
+		if (languageId == 1) {
+			f.setLanguage("English");
+		} else if (languageId == 2) {
+			f.setLanguage("Italian");
+		} else if (languageId == 3) {
+			f.setLanguage("Japanese");
+		} else if (languageId == 4) {
+			f.setLanguage("Mandarin");
+		} else if (languageId == 5) {
+			f.setLanguage("French");
+		} else if (languageId == 6) {
+			f.setLanguage("German");
+		}
 		f.setLength(length);
 		f.setRating(rating);
 		f.setRentalDuration(rentalDuration);
 		f.setRentalRate(rentalRate);
 		f.setReplacementCost(replacementCost);
 		f.setSpecialFeatures(specialFeatures);
+		mv.addObject("film", f);
+		mv.setViewName("WEB-INF/views/redirect.jsp");
 		try {
 			f = filmDAO.createFilm(f);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			mv.setViewName("WEB-INF/views/errorCreation.html");
+		} catch (RuntimeException e) {
+			mv.setViewName("WEB-INF/views/errorCreation.html");
 		}
-		System.out.println(f.getId());
-		mv.addObject("film", f);
-		mv.setViewName("WEB-INF/views/redirect.jsp");
 		return mv;
 	}
 
@@ -97,7 +109,7 @@ public class FilmController {
 		ModelAndView mv = new ModelAndView();
 		if (edit.toUpperCase().equals("YES")) {
 			Film toEdit = null;
-			
+
 			try {
 				toEdit = filmDAO.findFilmById(Integer.valueOf(id));
 			} catch (Exception e) {
@@ -132,6 +144,19 @@ public class FilmController {
 		f.setDescription(description);
 		f.setReleaseYear(releaseYear);
 		f.setLanguageId(languageId);
+		if (languageId == 1) {
+			f.setLanguage("English");
+		} else if (languageId == 2) {
+			f.setLanguage("Italian");
+		} else if (languageId == 3) {
+			f.setLanguage("Japanese");
+		} else if (languageId == 4) {
+			f.setLanguage("Mandarin");
+		} else if (languageId == 5) {
+			f.setLanguage("French");
+		} else if (languageId == 6) {
+			f.setLanguage("German");
+		}
 		f.setLength(length);
 		f.setRating(rating);
 		f.setRentalDuration(rentalDuration);

@@ -20,7 +20,7 @@ If you choose to edit the film all the information of the selected film is shown
 
 # Lessons Learned:
 On this project we learned the importance of communication and how to work as a team. This was definitely a difficult project since it was the fist time that we used a webform to get information rather than using a scanner and getting information from the console. We learned a lot about mapping the information. 
-I had a hard time with being able to view what was added to the database, but after problem solving we discovered it was user error on my part! ~ Lauren. 
+I had a hard time with being able to view what was added to the database, but after problem solving we discovered it was user error on my part! The issue was that I had been typing nonsense instead of looking at the description for special features needing to be part of a set. I have definitely learned to look at the table! ~ Lauren. 
 It was really good to see how all of this stuff comes together. It was very interesting! ~ Sam
 We at first thought that this project was going to be a walk in the park, but over 50 commits later... we realized it was not. 
 Once it was working, that was a great feeling and being able to put the pieces together, even if we may have had to shove them into place. 

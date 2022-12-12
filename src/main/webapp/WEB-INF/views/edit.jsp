@@ -39,7 +39,7 @@
 			name="rentalDuration" value="${film.rentalDuration}" min="1" max="7" required> 
 			<label
 			for="rentalRate">Rental Rate</label> <input type="number"
-			name="rentalRate" value="${ film.rentalRate}" step=0.01 min="0.01" max="4"
+			name="rentalRate" value="${ film.rentalRate}" step=0.01 min="0.01" max="8"
 				name="rentalRate"> <label
 			for="length">Length</label><input type="number" name="length"
 			value="${film.length}" min="1" max="185"> 
