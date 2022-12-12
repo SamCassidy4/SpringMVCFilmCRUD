@@ -23,10 +23,10 @@ public class FilmController {
 		this.filmDAO = filmDAO;
 	}
 
-	@RequestMapping("home.do")
-	public String home() {
-		return "WEB-INF/views/home.jsp";
-	}
+//	@RequestMapping("home.do")
+//	public String home() {
+//		return "WEB-INF/views/home.jsp";
+//	}
 
 	@RequestMapping(path = "createFilm.do", method = RequestMethod.POST)
 	public ModelAndView createFilmFromHTML(
@@ -43,7 +43,7 @@ public class FilmController {
 		f.setDescription(description);
 		f.setReleaseYear(releaseYear);
 		f.setLanguageId(languageId);
-		f.setLength(12);
+		f.setLength(length);
 		f.setRating(rating);
 		f.setRentalDuration(rentalDuration);
 		f.setRentalRate(rentalRate);
@@ -132,7 +132,7 @@ public class FilmController {
 		f.setDescription(description);
 		f.setReleaseYear(releaseYear);
 		f.setLanguageId(languageId);
-		f.setLength(12);
+		f.setLength(length);
 		f.setRating(rating);
 		f.setRentalDuration(rentalDuration);
 		f.setRentalRate(rentalRate);

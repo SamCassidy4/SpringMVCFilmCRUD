@@ -20,6 +20,8 @@
 	Length: ${film.length } <br>
 	Replacement Cost: ${film.replacementCost } <br>
 	Rating: ${film.rating }<br>
+	Special Features: ${film.specialFeatures } <br>
+	
 	${film.actors }
  <br>
 
@@ -37,7 +39,8 @@
 		
 		<input type="radio" name="editFilm" value="YES"> <label>Yes</label>
 			<input type="text" hidden="true" name="id" value="${film.id}">
-			<input type="submit" value="Submit">
+			<input type="submit" value="Submit"> <br>
+<a href="index.html">Back to main page</a>
 
 	</form>
 </body>

@@ -9,6 +9,6 @@
 <body>
 
 <h3>Unable to Delete Listed Film</h3>
-<a href="index.html">Back to Home</a>
+<a href="index.html">Back to main page</a>
 </body>
 </html>

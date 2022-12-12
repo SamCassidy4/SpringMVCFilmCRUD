@@ -9,6 +9,7 @@
 <body>
 
 <h2>Movie Successfully deleted</h2>
+<a href="index.html">Back to main page</a>
 
 </body>
 </html>

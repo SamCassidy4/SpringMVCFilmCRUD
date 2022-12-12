@@ -21,6 +21,7 @@
 	Length: ${film.length } <br>
 	Replacement Cost: ${film.replacementCost } <br>
 	Rating: ${film.rating }<br>
+	Special Features: ${film.specialFeatures } <br>
 	Cast: ${film.actors}<br>
 			<P>
 		<form action="delete.do" method="post">

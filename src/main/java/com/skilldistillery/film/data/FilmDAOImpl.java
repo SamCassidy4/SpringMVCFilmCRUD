@@ -340,7 +340,6 @@ public class FilmDAOImpl implements FilmDAO {
 			ps.setDouble(8, film.getReplacementCost());
 			ps.setString(9, film.getRating());
 			ps.setString(10, film.getSpecialFeatures());
-			ps.setInt(11, film.getId());
 			int updateCount = ps.executeUpdate();
 			if (updateCount == 1) {
 				ResultSet keys = ps.getGeneratedKeys();
@@ -392,7 +391,6 @@ public class FilmDAOImpl implements FilmDAO {
 			ps.setInt(8, film.getLength() == null ? 0 : film.getLength());
 			ps.setDouble(9, film.getReplacementCost() == null ? 0.0 : film.getReplacementCost());
 			ps.setString(10, film.getSpecialFeatures() == null ? "" : film.getSpecialFeatures());
-			ps.setInt(11, film.getId() == 0 ? 0 : film.getId());
 			int updateCount = ps.executeUpdate();
 
 			if (updateCount == 1) {
