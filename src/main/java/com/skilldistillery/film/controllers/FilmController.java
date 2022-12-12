@@ -38,7 +38,7 @@ public class FilmController {
 			@RequestParam("specialFeatures") String specialFeatures) {
 		ModelAndView mv = new ModelAndView();
 		Film f = new Film();
-
+		
 		f.setTitle(title);
 		f.setDescription(description);
 		f.setReleaseYear(releaseYear);
