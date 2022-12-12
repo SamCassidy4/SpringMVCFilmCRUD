@@ -1,5 +1,6 @@
 package com.skilldistillery.film.data;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import com.skilldistillery.film.entities.Actor;
@@ -18,7 +19,7 @@ public interface FilmDAO {
 
 	public boolean deleteActor(Actor actor);
 
-	public Film createFilm(Film film);
+	public Film createFilm(Film film) throws SQLException;
 
 	public boolean saveFilm(Film film);
 	

@@ -17,6 +17,8 @@ import com.skilldistillery.film.entities.Film;
 @Component
 public class FilmDAOImpl implements FilmDAO {
 	private static final String URL = "jdbc:mysql://localhost:3306/sdvid?useSSL=false&useLegacyDatetimeCode=false&serverTimezone=US/Mountain";
+	String username = "student";
+	String password = "student";
 
 	// establishing database link
 	public FilmDAOImpl() {
@@ -31,8 +33,6 @@ public class FilmDAOImpl implements FilmDAO {
 
 	@Override
 	public Film findFilmById(int filmId) {
-		String username = "student";
-		String password = "student";
 
 		Film film = null;
 
@@ -74,12 +74,9 @@ public class FilmDAOImpl implements FilmDAO {
 		Actor actor = null;
 		try {
 
-			String user = "student";
-			String password = "student";
-
 			String sql = "SELECT id, first_name, last_name FROM actor WHERE id = ?";
 
-			Connection conn = DriverManager.getConnection(URL, user, password);
+			Connection conn = DriverManager.getConnection(URL, username, password);
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			System.out.println(stmt);
 
@@ -105,12 +102,10 @@ public class FilmDAOImpl implements FilmDAO {
 
 	public List<Actor> findActorsByFilmId(int filmId) {
 		List<Actor> actors = new ArrayList<>();
-		String user = "student";
-		String password = "student";
 
 		try {
 			String sql = "SELECT actor.id, actor.first_name, actor.last_name FROM actor JOIN film_actor ON film_actor.actor_id = actor.id JOIN film ON film_actor.film_id = film.id WHERE film.id = ?;";
-			Connection conn = DriverManager.getConnection(URL, user, password);
+			Connection conn = DriverManager.getConnection(URL, username, password);
 
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, filmId);
@@ -139,8 +134,6 @@ public class FilmDAOImpl implements FilmDAO {
 
 	public List<Film> findFilmByKeyword(String keyword) {
 		List<Film> movie = new ArrayList<>();
-		String username = "student";
-		String password = "student";
 
 		try {
 			Connection conn = DriverManager.getConnection(URL, username, password);
@@ -192,8 +185,6 @@ public class FilmDAOImpl implements FilmDAO {
 	@Override
 	public Actor createActor(Actor actor) {
 
-		String username = "student";
-		String password = "student";
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection(URL, username, password);
@@ -249,7 +240,7 @@ public class FilmDAOImpl implements FilmDAO {
 	@Override
 	public boolean saveActor(Actor actor) {
 		String username = "student";
-		String password = "student";
+
 		Connection conn = null;
 
 		try {
@@ -299,8 +290,6 @@ public class FilmDAOImpl implements FilmDAO {
 
 	@Override
 	public boolean deleteActor(Actor actor) {
-		String username = "student";
-		String password = "student";
 		Connection conn = null;
 
 		try {
@@ -336,8 +325,6 @@ public class FilmDAOImpl implements FilmDAO {
 	}
 
 	public Film createFilm(Film film) {
-		String username = "student";
-		String password = "student";
 
 		try (Connection conn = DriverManager.getConnection(URL, username, password)) {
 			conn.setAutoCommit(false);
@@ -360,18 +347,19 @@ public class FilmDAOImpl implements FilmDAO {
 				if (keys.next()) {
 					int newId = keys.getInt(1);
 					film.setId(newId);
-					if (film.getActors() != null && film.getActors().size() > 0) {
-						sql = "INSERT INTO film_actor (film_id, actor_id) VALUES (?,?)";
-						ps = conn.prepareStatement(sql);
-
-						ps.setInt(1, film.getId());
-
-						for (Actor actor : film.getActors()) {
-							ps.setInt(2, actor.getId());
-							updateCount = ps.executeUpdate();
-
-						}
-					}
+//					if (film.getActors() != null && film.getActors().size() > 0) {
+//						sql = "INSERT INTO film_actor (film_id, actor_id) VALUES (?,?)";
+//						ps = conn.prepareStatement(sql);
+//						ps.setInt(1, film.getId());
+//						updateCount = ps.executeUpdate();
+//						System.out.println(updateCount);
+////////						////
+//						for (Actor actor : film.getActors()) {
+//							ps.setInt(2, actor.getId());
+//							updateCount = ps.executeUpdate();
+//
+//						}
+//					}
 				}
 			} else {
 				film = null;
@@ -380,15 +368,12 @@ public class FilmDAOImpl implements FilmDAO {
 
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
-
 			throw new RuntimeException("Error inserting film " + film);
 		}
 		return film;
 	}
 
 	public boolean saveFilm(Film film) {
-		String username = "student";
-		String password = "student";
 
 		Connection conn = null;
 
@@ -447,8 +432,6 @@ public class FilmDAOImpl implements FilmDAO {
 	}
 
 	public boolean deleteFilm(Film film) {
-		String username = "student";
-		String password = "student";
 
 		Connection conn = null;
 
