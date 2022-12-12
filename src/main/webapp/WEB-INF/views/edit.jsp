@@ -40,12 +40,12 @@
 			<label
 			for="rentalRate">Rental Rate</label> <input type="number"
 			name="rentalRate" value="${ film.rentalRate}" step=0.01 min="0.01" max="8"
-				name="rentalRate"> <label
+				name="rentalRate" required> <label
 			for="length">Length</label><input type="number" name="length"
-			value="${film.length}" min="1" max="185"> 
+			value="${film.length}" min="1" max="185" required> 
 			<label for="replacementCost">Replacement
 			Cost:</label> <input type="number" step= 0.01 name="replacementCost"
-			value="${film.replacementCost}" min="0" max="30">
+			value="${film.replacementCost}" min="0" max="30" required>
 	<label
 				for="rating">Rating:</label> <select name="rating" required>
 				<option selected>${film.rating }</option>
