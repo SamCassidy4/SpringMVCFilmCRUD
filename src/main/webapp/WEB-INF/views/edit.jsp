@@ -13,7 +13,7 @@
 	<h3>Edit Film:</h3>
 	
 	
-	<form action="edit.do" method="POST">
+	<form action="editYes.do" method="POST">
 	
 			<input type="text" hidden="true" name="id" value="${film.id}">
 			

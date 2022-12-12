@@ -29,19 +29,16 @@ public class FilmController {
 	}
 
 	@RequestMapping(path = "createFilm.do", method = RequestMethod.POST)
-	public ModelAndView createFilmFromHTML(@RequestParam("title") String title, 
-			@RequestParam("description") String description,
-			@RequestParam("releaseYear") Integer releaseYear, 
-			@RequestParam("languageId") Integer languageId,
-			@RequestParam("length") Integer length, 
-			@RequestParam("rating") String rating,
-			@RequestParam("rentalDuration") Integer rentalDuration, 
-			@RequestParam("rentalRate") Double rentalRate,
-			@RequestParam("replacementCost") Double replacementCost,
-			@RequestParam("specialFeatures") String specialFeatures) throws SQLException {
+	public ModelAndView createFilmFromHTML(
+			@RequestParam("title") String title,
+			@RequestParam("description") String description, @RequestParam("releaseYear") Integer releaseYear,
+			@RequestParam("languageId") Integer languageId, @RequestParam("length") Integer length,
+			@RequestParam("rating") String rating, @RequestParam("rentalDuration") Integer rentalDuration,
+			@RequestParam("rentalRate") Double rentalRate, @RequestParam("replacementCost") Double replacementCost,
+			@RequestParam("specialFeatures") String specialFeatures) {
 		ModelAndView mv = new ModelAndView();
 		Film f = new Film();
-		
+
 		f.setTitle(title);
 		f.setDescription(description);
 		f.setReleaseYear(releaseYear);
@@ -52,7 +49,12 @@ public class FilmController {
 		f.setRentalRate(rentalRate);
 		f.setReplacementCost(replacementCost);
 		f.setSpecialFeatures(specialFeatures);
-		f = filmDAO.createFilm(f);
+		try {
+			f = filmDAO.createFilm(f);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(f.getId());
 		mv.addObject("film", f);
 		mv.setViewName("WEB-INF/views/redirect.jsp");
@@ -91,18 +93,17 @@ public class FilmController {
 	}
 
 	@RequestMapping(path = "edit.do", method = RequestMethod.POST)
-	public ModelAndView editFilm(@RequestParam("editFilm") String edit, @RequestParam("id") String id) {
+	public ModelAndView editFilmConfirm(@RequestParam("editFilm") String edit, @RequestParam("id") String id) {
 		ModelAndView mv = new ModelAndView();
 		if (edit.toUpperCase().equals("YES")) {
 			Film toEdit = null;
-			
+
 			try {
 				toEdit = filmDAO.findFilmById(Integer.valueOf(id));
-			}
-			catch(Exception e) {
+			} catch (Exception e) {
 				mv.setViewName("WEB-INF/views/error.jsp");
 			}
-			if(toEdit != null) {
+			if (toEdit != null) {
 				mv.addObject("film", toEdit);
 				mv.setViewName("WEB-INF/views/edit.jsp");
 			} else {
@@ -111,47 +112,70 @@ public class FilmController {
 		} else {
 			mv.setViewName("WEB-INF/index.html");
 		}
-		
+
 		mv.setViewName("WEB-INF/views/edit.jsp");
-		
+
 		return mv;
 	}
-	
-//	@RequestMapping(path="editComplete.do")
-	
+
+	@RequestMapping(path = "editYes.do", method = RequestMethod.POST)
+	public ModelAndView editFilm(@RequestParam("title") String title, @RequestParam("description") String description,
+			@RequestParam("releaseYear") Integer releaseYear, @RequestParam("languageId") Integer languageId,
+			@RequestParam("length") Integer length, @RequestParam("rating") String rating,
+			@RequestParam("rentalDuration") Integer rentalDuration, @RequestParam("rentalRate") Double rentalRate,
+			@RequestParam("replacementCost") Double replacementCost,
+			@RequestParam("specialFeatures") String specialFeatures, @RequestParam("id") int id) {
+		ModelAndView mv = new ModelAndView();
+		Film f = new Film();
+		f.setId(id);
+		f.setTitle(title);
+		f.setDescription(description);
+		f.setReleaseYear(releaseYear);
+		f.setLanguageId(languageId);
+		f.setLength(12);
+		f.setRating(rating);
+		f.setRentalDuration(rentalDuration);
+		f.setRentalRate(rentalRate);
+		f.setReplacementCost(replacementCost);
+		f.setSpecialFeatures(specialFeatures);
+
+		mv.addObject("film", f);
+		mv.setViewName("WEB-INF/views/redirect.jsp");
+		return mv;
+	}
+
 	@RequestMapping(path = "findFilmByKeyword.do", method = RequestMethod.POST)
-	public ModelAndView findFilmsByKeyword(@RequestParam("kw")String kw) {
+	public ModelAndView findFilmsByKeyword(@RequestParam("kw") String kw) {
 		ModelAndView mv = new ModelAndView();
 		List<Film> films = new ArrayList<>();
-		
-		if(kw.equals("")) {
+
+		if (kw.equals("")) {
 			mv.setViewName("WEB-INF/views/error.jsp");
 			return mv;
-		}
-		else {
+		} else {
 			films = filmDAO.findFilmByKeyword(kw);
 		}
-		if(films.size() == 0) {
+		if (films.size() == 0) {
 			mv.setViewName("WEB-INF/views/error.jsp");
 			return mv;
 		}
 		mv.addObject("films", films);
 		mv.setViewName("WEB-INF/views/keyword.jsp");
-		
+
 		return mv;
-		
+
 	}
+
 	@RequestMapping(path = "updateFilm.do", method = RequestMethod.POST)
 	public ModelAndView updateFilm(Film film) {
 		ModelAndView mv = new ModelAndView();
-		
+
 		boolean success = filmDAO.saveFilm(film);
-		if(success) {
-			mv.addObject("film",film);
+		if (success) {
+			mv.addObject("film", film);
 			mv.setViewName("WEB-INF/views/redirect.jsp");
 			return mv;
-		}
-		else {
+		} else {
 			mv.setViewName("WEB-INF/views/error.jsp");
 			return mv;
 		}

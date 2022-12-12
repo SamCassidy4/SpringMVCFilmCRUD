@@ -20,7 +20,6 @@
 	Length: ${film.length } <br>
 	Replacement Cost: ${film.replacementCost } <br>
 	Rating: ${film.rating }<br>
-	Actors include: 
 	${film.actors }
  <br>
 
